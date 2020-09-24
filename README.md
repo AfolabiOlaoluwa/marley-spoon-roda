@@ -19,7 +19,7 @@ I will advise you use `Chruby` to configure your environment handling. You can f
 1. Clone the repo.
 2. Run `bundle install` from the root of the application.
 2. Create `.env.rb` only by running the code below. This is used to setup your secret keys and environment variables:
-    * `rake "setup [App]"`
+    * `rake "setup[App]"`
 3. Then, open your `.env.rb` file and paste the `SPACE_ID` and `ACCESS_TOKEN`
 5. Start the application by running `rackup`
 
