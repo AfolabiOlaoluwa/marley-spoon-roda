@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+      <h1>All Recipes </h1>
+    </div>
+  </div>
+  <div class="row">
+    <% @recipes.each do |recipe| %>
+      <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+        <div class="card">
+          <a href="/<%= recipe.id %>">
+            <div class="img-responsive">
+              <img src="<%= recipe.photo.url(width: 300, height: 200, format: 'png', quality: 100) %>" alt="<%= recipe.title %>"/>
+            </div>
+            <div class="card-block">
+              <h5 class="text-bold"><%= recipe.title %></h5>
+            </div>
+          </a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
