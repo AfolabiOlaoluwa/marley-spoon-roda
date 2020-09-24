@@ -60,6 +60,7 @@ task :setup, [:app] do |_, args|
   random_bytes = lambda{[SecureRandom.random_bytes(64).gsub("\x00"){((rand*255).to_i+1).chr}].pack('m').inspect}
 
   File.write('.env.rb', <<END)
+case ENV['RACK_ENV'] ||= 'development'
 when 'test'
   ENV['#{upper_name}_SESSION_SECRET'] ||= #{random_bytes.call}.unpack('m')[0]
   ENV['CONTENTFUL_SPACE_ID'] =''
