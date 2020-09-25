@@ -25,12 +25,12 @@ I will advise you use `Chruby` to configure your environment handling. You can f
 
 ##### Running Test
 
+Note: 
+
+Provide SPACE_ID and ACCESS_TOKEN inside `spec_helper.rb` before you run the test. 
+
 To know the rake tasks available to you, you can run:
 * `rake --tasks`
 
 To run any of the test, you can pick any of the rake command available to you e.g.
 * `rake model_spec`
-
-# Note (**Tests)
-
-* The test is testing for nothing. I believe I took this process at the wrong time because I am still busy with office sprints, hence I could not quickly finish the glitches I have with Minitest setup with RODA, and also Contentful_Model SDK (which is not tested itself). I started this solution today, but I decided to submit so as not to loose the deadline available to me. I do hope my abilities can be looked into and not penalised for test case not available. However, I will get back to it and make sure I test for it all I have written. Thank you.
