@@ -1,6 +1,5 @@
 ENV["RACK_ENV"] = "test"
 require_relative '../../models/recipe'
-require 'contentful_model'
 
 require_relative '../minitest_helper'
 
