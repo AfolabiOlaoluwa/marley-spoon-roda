@@ -93,7 +93,7 @@ class App < Roda
     r.hash_routes('')
 
     r.get String do |id|
-      @recipe_details = Recipe.find(id)
+      @recipe_details = Recipe.find_recipe(id)
       next unless @recipe_details
       view 'show'
     end
