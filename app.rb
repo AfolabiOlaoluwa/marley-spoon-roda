@@ -94,6 +94,7 @@ class App < Roda
 
     r.get String do |id|
       @recipe_details = Recipe.find_recipe(id)
+
       next unless @recipe_details
       view 'show'
     end
