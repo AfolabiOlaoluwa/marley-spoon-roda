@@ -27,7 +27,7 @@ I will advise you use `Chruby` to configure your environment handling. You can f
 
 Note: 
 
-Provide SPACE_ID and ACCESS_TOKEN inside `spec_helper.rb` before you run the test. 
+Provide SPACE_ID and ACCESS_TOKEN inside each `spec_helper.rb` before you run the test. 
 
 To know the rake tasks available to you, you can run:
 * `rake --tasks`
