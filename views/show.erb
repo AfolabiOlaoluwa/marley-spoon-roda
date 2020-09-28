@@ -13,7 +13,7 @@
         <div class="card-block">
           <h3 class="text-bold"><%= @recipe_details.title %></h3>
           <% if @recipe_details.fields.key?(:tags) %>
-            <div>
+            <div id="tags">
               <br>
               <% @recipe_details.tags.each do |tag| %>
                 <span class="btn btn-primary btn-sm"><%= tag.name %></span>
@@ -27,7 +27,7 @@
             </div>
           <% end %>
           <% if @recipe_details.fields.key?(:chef) %>
-            <div>
+            <div id="chef">
               <br>
               <p>Chef: <%= @recipe_details.chef.name %></p>
             </div>
