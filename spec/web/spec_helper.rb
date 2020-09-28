@@ -1,9 +1,15 @@
-ENV["RACK_ENV"] = "test"
-require_relative '../../app'
+# frozen_string_literal: true
 
+ENV['RACK_ENV'] = 'test'
+
+require 'contentful_model'
 require 'capybara'
 require 'capybara/dsl'
+require 'capybara/minitest'
 require 'rack/test'
+require_relative '../../app'
+require_relative '../../.env.rb'
+require_relative '../../config/initializers/contentful_model'
 
 Gem.suffix_pattern
 
@@ -17,18 +23,15 @@ else
   Refrigerator.freeze_core
 end
 
-App.plugin :not_found do
-  raise "404 - File Not Found"
-end
-App.plugin :error_handler do |e|
-  raise e
-end
+App.plugin(:not_found) { raise '404 - File Not Found' }
+App.plugin :error_handler, &method(:raise)
 
 Capybara.app = App.freeze.app
 
 class Minitest::HooksSpec
   include Rack::Test::Methods
   include Capybara::DSL
+  include Capybara::Minitest::Assertions
 
   def app
     Capybara.app
