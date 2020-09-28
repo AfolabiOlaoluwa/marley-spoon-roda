@@ -32,5 +32,14 @@ Provide SPACE_ID and ACCESS_TOKEN inside each `spec_helper.rb` before you run th
 To know the rake tasks available to you, you can run:
 * `rake --tasks`
 
-To run any of the test, you can pick any of the rake command available to you e.g.
+To run any of the test, you can pick any of the rake command available to you e.g. To run model spec: 
+
 * `rake model_spec`
+
+To run web view spec
+
+* `rake web_spec`
+
+To run all the specs available
+
+* `rake default`
