@@ -11,3 +11,4 @@ else
     Warning.ignore([:missing_ivar, :method_redefined, :not_reached], path)
   end
 end
+
