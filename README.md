@@ -1,9 +1,9 @@
 # README
 
-My solution is based on the response from the Headless API called Contentful. I have used the contentful_model SDK to render a solution. 
+My solution is based on the response from the Headless API called Contentful API. I have used the contentful_model SDK to render a solution. 
 ##### Framework...
 
-My solution is based on RODA. You can read up on RODA on https://roda.jeremyevans.net/. I used RODA because it serves more request that Hanami, Sinatra, Grape, and because it is closer to Rack in performance. Its memory consumption is low compared to Hanami, Sinatra, Grape and it is lightweight.
+My solution is based on RODA. You can read up on RODA on https://roda.jeremyevans.net/. I used RODA because it serves more request that Hanami, Sinatra, Grape, Rails API, and because it is closer to Rack in performance. Its memory consumption is low compared to Hanami, Sinatra, Grape, Rails API and it is lightweight.
 
 ##### Ruby Version 
 
@@ -32,5 +32,14 @@ Provide SPACE_ID and ACCESS_TOKEN inside each `spec_helper.rb` before you run th
 To know the rake tasks available to you, you can run:
 * `rake --tasks`
 
-To run any of the test, you can pick any of the rake command available to you e.g.
+To run any of the test, you can pick any of the rake command available to you e.g. To run model spec: 
+
 * `rake model_spec`
+
+To run web view spec
+
+* `rake web_spec`
+
+To run all the specs available
+
+* `rake default`
