@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 dev = ENV['RACK_ENV'] == 'development'
 
 if dev
@@ -6,11 +8,9 @@ if dev
 end
 
 require 'rack/unreloader'
-Unreloader = Rack::Unreloader.new(subclasses: %w'Roda Sequel::Model', logger: logger, reload: dev) { App }
-
+Unreloader = Rack::Unreloader.new(subclasses: ['Roda'], logger: logger, reload: dev) { App }
 require './models/recipe'
 require 'contentful_model'
-
 Unreloader.require('app.rb') { 'App' }
 run(dev ? Unreloader : App.freeze.app)
 
@@ -21,7 +21,7 @@ if freeze_core
   rescue LoadError
     # ignored
   else
-    require 'tilt/sass' unless File.exist?(File.expand_path('../compiled_assets.json', __FILE__))
+    require 'tilt/sass' unless File.exist?(File.expand_path('compiled_assets.json', __dir__))
 
     # rackup -s Puma
     require 'yaml'

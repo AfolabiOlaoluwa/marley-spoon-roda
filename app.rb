@@ -1,8 +1,11 @@
-require './.env' if File.exist?(".env.rb")
+# frozen_string_literal: true
+
+require './.env' if File.exist?('.env.rb')
 require './config/initializers/contentful_model'
 require 'roda'
 require './models/recipe'
 require 'tilt/sass'
+require 'rack/unreloader'
 
 class App < Roda
   opts[:check_dynamic_arity] = false
@@ -30,22 +33,18 @@ class App < Roda
 
   plugin :route_csrf
   plugin :flash
-  plugin :assets, css: 'recipe.scss', css_opts: {style: :compressed, cache: false}, timestamp_paths: true
+  plugin :assets, css: 'recipe.scss', css_opts: { style: :compressed, cache: false }, timestamp_paths: true
   plugin :render, escape: true, layout: './layout'
   plugin :view_options
   plugin :public
   plugin :hash_routes
 
-  logger = if ENV['RACK_ENV'] == 'test'
-             Class.new{def write(_) end}.new
-           else
-             $stderr
-           end
+  logger = ENV['RACK_ENV'] == 'test' ? Class.new { def write(_) end }.new : $stderr
   plugin :common_logger, logger
 
   plugin :not_found do
-    @page_title = "File Not Found"
-    view(:content=>"")
+    @page_title = 'File Not Found'
+    view(content: ' ')
   end
 
   if ENV['RACK_ENV'] == 'development'
@@ -61,24 +60,23 @@ class App < Roda
   plugin :error_handler do |e|
     case e
     when Roda::RodaPlugins::RouteCsrf::InvalidToken
-      @page_title = "Invalid Security Token"
+      @page_title = 'Invalid Security Token'
       response.status = 400
-      view(:content=>"<p>An invalid security token was submitted with this request, and this request could not be processed.</p>")
+      view(content: '<p>An invalid security token was submitted with this request, and this request could not be processed.</p>') # rubocop:disable Layout/LineLength
     else
       $stderr.print "#{e.class}: #{e.message}\n"
       $stderr.puts e.backtrace
-      next exception_page(e, :assets=>true) if ENV['RACK_ENV'] == 'development'
-      @page_title = "Internal Server Error"
-      view(:content=>"")
+      next exception_page(e, assets: true) if ENV['RACK_ENV'] == 'development'
+
+      @page_title = 'Internal Server Error'
+      view(content: ' ')
     end
   end
 
   plugin :sessions,
          key: '_App.session',
-         cookie_options: {secure: ENV['RACK_ENV'] },
+         cookie_options: { secure: ENV['RACK_ENV'] },
          secret: ENV.send((ENV['RACK_ENV'] == 'development' ? :[] : :delete), 'APP_SESSION_SECRET')
-
-  Unreloader.require('routes') {}
 
   hash_routes do
     view '', 'index'
@@ -94,8 +92,8 @@ class App < Roda
 
     r.get String do |id|
       @recipe_details = Recipe.find_recipe(id)
-
       next unless @recipe_details
+
       view 'show'
     end
   end
